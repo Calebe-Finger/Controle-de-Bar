@@ -1,4 +1,5 @@
 ﻿using ControleDeBar.ConsoleApp.Compartilhado;
+using ControleDeBar.ConsoleApp.ModuloMesa;
 
 namespace ControleDeBar.ConsoleApp
 {
@@ -12,7 +13,7 @@ namespace ControleDeBar.ConsoleApp
             {
                 telaPrincipal.ApresentarMenuPrincipal();
 
-                TelaBase telaEscolhida = telaPrincipal.ObterTela();
+                ITela telaEscolhida = telaPrincipal.ObterTela();
 
                 if (telaEscolhida == null)
                     break;

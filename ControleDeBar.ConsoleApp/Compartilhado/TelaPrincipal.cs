@@ -1,11 +1,18 @@
-﻿namespace ControleDeBar.ConsoleApp.Compartilhado
+﻿using ControleDeBar.ConsoleApp.ModuloMesa;
+
+namespace ControleDeBar.ConsoleApp.Compartilhado
 {
     public class TelaPrincipal
     {
         private char opcaoEscolhida;
 
+        private RepositorioMesa repositorioMesa;
+        private TelaMesa telaMesa;
+
         public TelaPrincipal()
         {
+            repositorioMesa = new RepositorioMesa();
+            telaMesa = new TelaMesa(repositorioMesa);
         }
 
         public void ApresentarMenuPrincipal()
@@ -30,10 +37,10 @@
             opcaoEscolhida = Console.ReadLine()![0];
         }
 
-        public TelaBase ObterTela()
+        public ITela ObterTela()
         {
             if (opcaoEscolhida == '1')
-                return null;
+                return telaMesa;
 
             if (opcaoEscolhida == '2')
                 return null;
