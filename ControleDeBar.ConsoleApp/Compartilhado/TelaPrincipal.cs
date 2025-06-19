@@ -2,8 +2,8 @@
 
 namespace ControleDeBar.ConsoleApp.Compartilhado
 {
-    public class TelaPrincipal
-    {
+    public class TelaPrincipal  //Não pode possuir um tipo, pois é ela quem está criando as telas e 
+    {                           // repositórios, além de poder retornar qualquer tipo
         private char opcaoEscolhida;
 
         private RepositorioMesa repositorioMesa;

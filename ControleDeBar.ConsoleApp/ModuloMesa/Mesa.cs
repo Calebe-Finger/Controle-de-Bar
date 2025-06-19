@@ -2,7 +2,7 @@
 
 namespace ControleDeBar.ConsoleApp.ModuloMesa
 {
-    public class Mesa : EntidadeBase<Mesa>
+    public class Mesa : EntidadeBase<Mesa> // Possui o Tipo Mesa
     {
         public int Numero { get; set; }
         public int Capacidade { get; set; }

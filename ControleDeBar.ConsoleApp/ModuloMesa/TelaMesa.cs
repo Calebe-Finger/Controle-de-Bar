@@ -2,7 +2,8 @@
 
 namespace ControleDeBar.ConsoleApp.ModuloMesa
 {
-    public class TelaMesa : TelaBase<Mesa>, ITela
+    public class TelaMesa : TelaBase<Mesa>, ITela //Significa que além da TelaMesa ser uma TelaBase, ela
+                                                  //também implementa a ITela.
     {
         public TelaMesa(RepositorioMesa repositorioMesa) : base("Mesa", repositorioMesa)
         {

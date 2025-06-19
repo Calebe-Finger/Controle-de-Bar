@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
 
-        public abstract void AtualizarRegistro(Tipo registroAtualizado);
+        public abstract void AtualizarRegistro(Tipo registroAtualizado); //Tipo está representando a EntidadeBase
         public abstract string Validar();
     }
 }
