@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace ControleDeBar.ConsoleApp.ModuloGarcons
 {
-    public class TelaGarcom : TelaBase<Garcom>
+    public class TelaGarcom : TelaBase<Garcom>, ITela
     {
         public TelaGarcom(RepositorioBase<Garcom> repositorio) : base("Garçom", repositorio)
         {

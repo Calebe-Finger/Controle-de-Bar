@@ -129,9 +129,15 @@
 
             Console.WriteLine();
 
-            repositorio.ExcluirRegistro(idSelecionado);
+            if (repositorio.ExcluirRegistro(idSelecionado))
+                ApresentarMensagem($"{nomeEntidade} excluído/a com sucesso!", ConsoleColor.Green);
 
-            ApresentarMensagem($"{nomeEntidade} excluído/a com sucesso!", ConsoleColor.Green);
+            else
+                ApresentarMensagem($"O garçom não pode ser excluido, pois está ocupado!", ConsoleColor.Red);
+
+
+            Console.WriteLine("Pressione ENTER para continuar...");
+            Console.ReadLine();
         }
 
         public abstract void VisualizarRegistros(bool exibirCabecalho);

@@ -39,7 +39,8 @@ namespace ControleDeBar.ConsoleApp.ModuloMesa
                 );
             }
 
-            ApresentarMensagem("Digite ENTER para continuar...", ConsoleColor.DarkYellow);
+            Console.WriteLine("\nDigite ENTER para continuar...");
+            Console.ReadLine();
         }
 
         protected override Mesa ObterDados()

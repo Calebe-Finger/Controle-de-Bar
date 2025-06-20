@@ -25,7 +25,7 @@
             return true;
         }
 
-        public bool ExcluirRegistro(int idSelecionado)
+        public virtual bool ExcluirRegistro(int idSelecionado)
         {
             for (int i = 0; i < registros.Length; i++)
             {
