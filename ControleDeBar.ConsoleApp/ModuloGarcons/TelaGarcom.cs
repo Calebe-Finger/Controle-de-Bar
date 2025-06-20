@@ -1,5 +1,4 @@
 ﻿using ControleDeBar.ConsoleApp.Compartilhado;
-using ControleDeBar.ConsoleApp.ModuloMesa;
 using System.Text.RegularExpressions;
 
 namespace ControleDeBar.ConsoleApp.ModuloGarcons
