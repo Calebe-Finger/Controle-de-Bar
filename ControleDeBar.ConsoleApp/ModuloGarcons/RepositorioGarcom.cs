@@ -4,11 +4,11 @@ namespace ControleDeBar.ConsoleApp.ModuloGarcons
 {
     public class RepositorioGarcom : RepositorioBase<Garcom>
     {
-        private Garcom garcom;
+        private Garcom[] garcom;
 
         public override bool ExcluirRegistro(int idSelecionado)
         {
-            if (garcom.EstaOcupado)
+            if (garcom[idSelecionado].EstaOcupado)
                 return false;
 
             else

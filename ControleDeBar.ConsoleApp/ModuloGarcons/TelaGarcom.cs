@@ -50,7 +50,7 @@ namespace ControleDeBar.ConsoleApp.ModuloGarcons
 
             while (!valorCorreto)
             {
-                Console.WriteLine("Digite o nome do garçom!");
+                Console.WriteLine("Digite o nome do garçom:");
                 nome = Console.ReadLine();
 
                 if (nome.Length < 3 || nome.Length > 100)
@@ -66,17 +66,20 @@ namespace ControleDeBar.ConsoleApp.ModuloGarcons
 
             while (!valorCorreto)
             {
-                Console.WriteLine("Digite o cpf do garçom!");
+                Console.WriteLine("Digite o CPF do garçom:");
                 cpf = Console.ReadLine();
 
-                if (!Regex.IsMatch(cpf, null))
+                if (cpf == null)
                 {
-                    Console.WriteLine("O \"Nome\" deve se adequar ao formato validado: XXX.XXX.XXX-XX");
+                    Console.WriteLine("O \"CPF\" deve se adequar ao formato validado: XXX.XXX.XXX-XX");
                 }
                 else
                     valorCorreto = true;
             }
-            return new Garcom(nome, cpf);
+
+            Garcom garcom = new Garcom(nome, cpf);
+
+            return garcom;
         }
     }
 }
