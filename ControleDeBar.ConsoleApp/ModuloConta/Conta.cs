@@ -1,6 +1,7 @@
 ﻿using ControleDeBar.ConsoleApp.Compartilhado;
 using ControleDeBar.ConsoleApp.ModuloGarcons;
 using ControleDeBar.ConsoleApp.ModuloMesa;
+using ControleDeBar.ConsoleApp.ModuloProduto;
 
 namespace ControleDeBar.ConsoleApp.ModuloConta
 {
@@ -12,22 +13,39 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
         public DateTime Abertura { get; set; }
         public DateTime Fechamento { get; set; }
         public bool EstaAberta {  get; set; }
+
         public Pedido[] Pedidos { get; set; }
 
-        public Conta(string )
+        public Conta(string titular, Mesa mesa, Garcom garcom)
         {
+            Titular = titular;
+            Mesa = mesa;
+            Garcom = garcom;
+            Pedidos = new Pedido[100];
 
+            Abrir();
         }
 
         public override void AtualizarRegistro(Conta registroAtualizado)
         {
             EstaAberta = registroAtualizado.EstaAberta;
-
+            Fechamento = registroAtualizado.Fechamento;
         }
 
         public override string Validar()
         {
-            
+            string erros = string.Empty;
+
+            if (Titular.Length < 3 || Titular.Length > 100)
+                erros += "O campo \"Titular\" deve conter entre 3 e 100 caracteres.";
+
+            if (Mesa == null)
+                erros += "O campo \"Mesa\" é obrigatório.";
+
+            if (Garcom == null)
+                erros += "O campo \"Garçom\" é obrigatório.";
+
+            return erros;
         }
 
         public void Abrir()
@@ -54,33 +72,50 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
             {
                 if (Pedidos[i] == null)
                     continue;
+
+                valorTotal += Pedidos[i].CalcularTotalParcial();
             }
+
+            return valorTotal;
         }
 
         public Pedido RegistrarPedido(Produto produto, int quantidadeEscolhida)
         {
-            Pedido 
-        }
-    }
+            Pedido novoPedido = new Pedido(produto, quantidadeEscolhida);
 
-    public class Pedido
-    {
-        public int Id { get; set; }
-        public Produto Produto { get; set; }
-        public int QuantidadeSolicitada { get; set; }
+            Pedidos[EncontrarIndicePedidosVazio()] = novoPedido;
 
-        private static int contadorIds = 0;
-
-        public Pedido(Produto produto, int quantidadeEscolhida)
-        {
-            Id = contadorIds++;
-            Produto = produto;
-            QuantidadeSolicitada = quantidadeEscolhida;
+            return novoPedido;
         }
 
-        public decimal CalcularTotalParcial()
+        public void RemoverPedido(int idPedido)
         {
-            return Produto.Valor * QuantidadeSolicitada;
+            int indiceParaRemover = -1;
+
+            for(int i = 0;i < Pedidos.Length;i++)
+            {
+                if (Pedidos[i] == null)
+                    continue;
+
+                if (Pedidos[i].Id == idPedido)
+                {
+                    indiceParaRemover = i;
+                    break;
+                }
+            }
+
+            Pedidos[indiceParaRemover] = null;
+        }
+
+        public int EncontrarIndicePedidosVazio()
+        {
+            for (int i = 0;i < Pedidos.Length;i++)
+            {
+                if (Pedidos[i] == null)
+                    return i;
+            }
+
+            return -1;
         }
     }
 }
