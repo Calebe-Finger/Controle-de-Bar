@@ -2,6 +2,7 @@
 using ControleDeBar.ConsoleApp.ModuloGarcons;
 using ControleDeBar.ConsoleApp.ModuloMesa;
 using ControleDeBar.ConsoleApp.ModuloProduto;
+using System.Globalization;
 
 namespace ControleDeBar.ConsoleApp.ModuloConta
 {
@@ -23,6 +24,12 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
 
         public char ApresentarMenu()
         {
+            Console.Clear();
+
+            Console.WriteLine("----------------------------------------");
+            Console.WriteLine("|           Controle de Bar            |");
+            Console.WriteLine("----------------------------------------\n");
+
             Console.WriteLine("1 - Cadastro de Conta");
             Console.WriteLine("2 - Gerenciar Pedidos da Conta");
             Console.WriteLine("3 - Visualizar Contas");
@@ -63,6 +70,50 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
             repositorioConta.Cadastrar(novaConta);
 
             ApresentarMensagem($"Conta aberta com sucesso!", ConsoleColor.Green);
+        }
+
+        public void ApresentarMenuGestaoPedidos()
+        {
+            ExibirCabecalho();
+
+            Console.WriteLine("Gestão de Pedidos de Contas");
+
+            Console.WriteLine();
+
+            VisualizarRegistros(false);
+
+            Console.WriteLine("Digite o ID da conta que deseja gerenciar: ");
+            int id = Convert.ToInt32(Console.ReadLine());
+
+            Conta contaSelecionada = repositorioConta.SelecionarRegistroPorId(id);
+
+            Console.WriteLine();
+
+            while (true)
+            {
+                VisualizarPedidosConta(contaSelecionada);
+
+                Console.WriteLine();
+
+                Console.WriteLine($"1 - Adicionar novo pedido");
+                Console.WriteLine($"2 - Remover Pedido");
+                Console.WriteLine($"S - Sair");
+
+                Console.WriteLine();
+
+                Console.WriteLine("Digite uma opção válida: ");
+                char opcaoEscolhida = Console.ReadLine()[0];
+
+                if (char.ToUpper(opcaoEscolhida) == 'S')
+                    break;
+
+                switch (opcaoEscolhida)
+                {
+                    case '1': AdicionarPedido(contaSelecionada); break;
+
+                    case '2': RemoverPedido(contaSelecionada); break;
+                }
+            }
         }
 
         public void EditarRegistro()
@@ -233,9 +284,118 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
             }
         }
 
-        internal void ApresentarMenuGestaoPedidos()
+        private void VisualizarPedidosConta(Conta conta)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Visualizar Pedidos da Conta");
+
+            Console.WriteLine();
+
+            Console.WriteLine(
+                "{0, -10} | {1, -20} | {2, -14} | {3, -20}",
+                "Id", "Produto", "Quantidade", "Valor Parcial"
+            );
+
+            Pedido[] pedidos = conta.Pedidos;
+
+            for (int i = 0; i < pedidos.Length; i++)
+            {
+                Pedido p = pedidos[i];
+
+                if (p == null)
+                    continue;
+
+                Console.WriteLine(
+                    "{0, -10} | {1, -20} | {2, -14} | {3, -20}",
+                    p.Id, p.Produto.Nome, p.QuantidadeSolicitada, p.CalcularTotalParcial().ToString("C2")
+                );
+            }
+        }
+
+        private void VisualizarProdutos()
+        {
+            Console.WriteLine("Visualizar Produtos");
+
+            Console.WriteLine();
+
+            Console.WriteLine(
+                "{0, -10} | {1, -30} | {2, -30}", "Id", "Nome", "Valor");
+
+            Produto[] produtos = repositorioProduto.SelecionarRegistros();
+
+            for (int i = 0; i < produtos.Length; i++)
+            {
+                Produto p = produtos[i];
+
+                if (p == null)
+                    continue;
+
+                Console.WriteLine("{0, -10} | {1, -30} | {2, -30}", p.Id, p.Nome, p.Valor.ToString("C2"));
+            }
+        }
+
+        private void AdicionarPedido(Conta contaSelecionada)
+        {
+            while (true)
+            {
+                ExibirCabecalho();
+
+                Console.WriteLine("Cadastro  de Pedidos da Conta");
+
+                Console.WriteLine();
+
+                VisualizarProdutos();
+
+                Console.WriteLine();
+
+                Console.WriteLine("Digite o ID do produto que deseja pedir: ");
+                int idProduto = Convert.ToInt32(Console.ReadLine());
+
+                Produto produtoSelecionado = repositorioProduto.SelecionarRegistroPorId(idProduto);
+
+                Console.WriteLine("Digite a quantidade do produto que deseja pedir: ");
+                int quantidadeSolicitada = Convert.ToInt32(Console.ReadLine());
+
+                Pedido pedido = contaSelecionada.RegistrarPedido(produtoSelecionado, quantidadeSolicitada);
+
+                ApresentarMensagem($"Pedido \"{pedido.ToString()}\" adicionado com sucesso!", ConsoleColor.Green);
+
+                Console.WriteLine("Deseja adicionar mais produtos (s/N)?");
+                char opcaoEscolhida = Console.ReadLine()[0];
+
+                if (char.ToUpper(opcaoEscolhida) == 'N')
+                    break;
+            }
+        }
+
+        private void RemoverPedido(Conta contaSelecionada)
+        {
+            while (true)
+            {
+                ExibirCabecalho();
+
+                Console.WriteLine("Remoção  de Pedidos da Conta");
+
+                Console.WriteLine();
+
+                VisualizarPedidosConta(contaSelecionada);
+
+                Console.WriteLine();
+
+                Console.WriteLine("Digite o ID do pedido que deseja remover: ");
+                int idPedido = Convert.ToInt32(Console.ReadLine());
+
+                contaSelecionada.RemoverPedido(idPedido);
+
+                ApresentarMensagem($"Pedido removido com sucesso!", ConsoleColor.Green);
+
+                Console.WriteLine("Deseja remover mais pedidos (s/N)?");
+                char opcaoEscolhida = Console.ReadLine()[0];
+
+                if (char.ToUpper(opcaoEscolhida) == 'N')
+                    break;
+            }
         }
     }
 }
+
+//Parou no 14:00
