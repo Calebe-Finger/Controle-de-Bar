@@ -31,8 +31,9 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
             Console.WriteLine("----------------------------------------\n");
 
             Console.WriteLine("1 - Cadastro de Conta");
-            Console.WriteLine("2 - Gerenciar Pedidos da Conta");
-            Console.WriteLine("3 - Visualizar Contas");
+            Console.WriteLine("2 - Fechamento de Conta");
+            Console.WriteLine("3 - Gerenciar Pedidos da Conta");
+            Console.WriteLine("4 - Visualizar Contas");
             Console.WriteLine("S - Sair");
 
             Console.WriteLine();
@@ -41,35 +42,6 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
             char opcaoEscolhida = Console.ReadLine().ToUpper()[0];
 
             return opcaoEscolhida;
-        }
-
-        public void CadastrarRegistro()
-        {
-            ExibirCabecalho();
-
-            Console.WriteLine("Abertura de Conta");
-
-            Console.WriteLine();
-
-            Conta novaConta = ObterDados();
-
-            string erros = novaConta.Validar();
-
-            if (erros.Length > 0)
-            {
-                ApresentarMensagem(
-                    string.Concat(erros, "\nDigite ENTER para continuar..."),
-                    ConsoleColor.Red
-                );
-
-                CadastrarRegistro();
-
-                return;
-            }
-
-            repositorioConta.Cadastrar(novaConta);
-
-            ApresentarMensagem($"Conta aberta com sucesso!", ConsoleColor.Green);
         }
 
         public void ApresentarMenuGestaoPedidos()
@@ -116,9 +88,61 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
             }
         }
 
+        public void CadastrarRegistro()
+        {
+            ExibirCabecalho();
+
+            Console.WriteLine("Abertura de Conta");
+
+            Console.WriteLine();
+
+            Conta novaConta = ObterDados();
+
+            string erros = novaConta.Validar();
+
+            if (erros.Length > 0)
+            {
+                ApresentarMensagem(
+                    string.Concat(erros, "\nDigite ENTER para continuar..."),
+                    ConsoleColor.Red
+                );
+
+                CadastrarRegistro();
+
+                return;
+            }
+
+            repositorioConta.Cadastrar(novaConta);
+
+            ApresentarMensagem($"Conta aberta com sucesso!", ConsoleColor.Green);
+        }
+
         public void EditarRegistro()
         {
+            ExibirCabecalho();
 
+            Console.WriteLine("Fechamento de contas");
+
+            Console.WriteLine();
+
+            VisualizarRegistros(false);
+
+            Console.WriteLine("Digite o ID da conta que deseja fechar: ");
+            int id = Convert.ToInt32(Console.ReadLine());
+
+            Conta contaSelecionada = repositorioConta.SelecionarRegistroPorId(id);
+
+            Console.WriteLine();
+
+            Console.WriteLine($"Deseja realmente fechar a conta do títular \"{contaSelecionada.Titular}\"? (s/N)");
+            char opcaoEscolhida = Console.ReadLine()[0];
+
+            if (char.ToUpper(opcaoEscolhida) == 'N')
+                return;
+
+            contaSelecionada.Fechar();
+
+            ApresentarMensagem($"Conta do titular \"{contaSelecionada.Titular}\" fechada com sucesso!", ConsoleColor.Green);
         }
 
         public void ExcluirRegistro()
