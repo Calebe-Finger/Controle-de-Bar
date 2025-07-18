@@ -34,6 +34,9 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
             Console.WriteLine("2 - Fechamento de Conta");
             Console.WriteLine("3 - Gerenciar Pedidos da Conta");
             Console.WriteLine("4 - Visualizar Contas");
+            Console.WriteLine("5 - Visualizar Contas em Aberto");
+            Console.WriteLine("6 - Visualizar Contas Fechadas");
+            Console.WriteLine("7 - Visualizar Faturamento Diário");
             Console.WriteLine("S - Sair");
 
             Console.WriteLine();
@@ -180,6 +183,116 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
                 c.Id, c.Titular, c.Mesa.Numero, c.Garcom.Nome, c.Abertura.ToShortDateString(), statusConta
                 );
             }
+
+            ApresentarMensagem("Digite ENTER para continuar...", ConsoleColor.DarkYellow);
+        }
+
+        public void VisualizarContasEmAberto()
+        {
+            ExibirCabecalho();
+
+            Console.WriteLine("Visualização de Contas em Aberto");
+
+            Console.WriteLine();
+
+            Console.WriteLine(
+                "{0, -10} | {1, -30} | {2, -14} | {3, -20} | {4, -20} | {5, -20}",
+                "Id", "Titular", "Mesa", "Garcom", "Abertura", "Status"
+            );
+
+            Conta[] contas = repositorioConta.SelecionarContasEmAberto();
+
+            for (int i = 0; i < contas.Length; i++)
+            {
+                Conta c = contas[i];
+
+                if (c == null)
+                    continue;
+
+                string statusConta = c.EstaAberta ? "Aberta" : "Fechada";
+
+                Console.WriteLine(
+                "{0, -10} | {1, -30} | {2, -14} | {3, -20} | {4, -20} | {5, -20}",
+                c.Id, c.Titular, c.Mesa.Numero, c.Garcom.Nome, c.Abertura.ToShortDateString(), statusConta
+                );
+            }
+
+            ApresentarMensagem("Digite ENTER para continuar...", ConsoleColor.DarkYellow);
+        }
+
+        public void VisualizarContasFechadas()
+        {
+            ExibirCabecalho();
+
+            Console.WriteLine("Visualização de Contas Fechadas");
+
+            Console.WriteLine();
+
+            Console.WriteLine(
+                "{0, -10} | {1, -30} | {2, -14} | {3, -20} | {4, -20} | {5, -20}",
+                "Id", "Titular", "Mesa", "Garcom", "Abertura", "Status"
+            );
+
+            Conta[] contas = repositorioConta.SelecionarContasFechadas();
+
+            for (int i = 0; i < contas.Length; i++)
+            {
+                Conta c = contas[i];
+
+                if (c == null)
+                    continue;
+
+                string statusConta = c.EstaAberta ? "Aberta" : "Fechada";
+
+                Console.WriteLine(
+                "{0, -10} | {1, -30} | {2, -14} | {3, -20} | {4, -20} | {5, -20}",
+                c.Id, c.Titular, c.Mesa.Numero, c.Garcom.Nome, c.Abertura.ToShortDateString(), statusConta
+                );
+            }
+
+            ApresentarMensagem("Digite ENTER para continuar...", ConsoleColor.DarkYellow);
+        }
+
+        public void VisualizarFaturamentoDiario()
+        {
+            ExibirCabecalho();
+
+            Console.WriteLine("Visualização de Faturamento Diário");
+
+            Console.WriteLine();
+
+            VisualizarRegistros(false);
+
+            Console.WriteLine("Digite uma data válida do passado: ");
+            DateTime dataFaturamento = DateTime.Parse(Console.ReadLine());
+
+            Console.WriteLine(
+               "{0, -10} | {1, -30} | {2, -14} | {3, -20} | {4, -20} | {5, -20}",
+               "Id", "Titular", "Mesa", "Garcom", "Abertura", "Status"
+            );
+
+            decimal totalFaturamento = 0.0m;
+
+            Conta[] contasFaturamento = repositorioConta.SelecionarContasPorData(dataFaturamento);
+
+            for (int i = 0; i < contasFaturamento.Length; i++)
+            {
+                Conta c = contasFaturamento[i];
+
+                if (c == null)
+                    continue;
+
+                totalFaturamento += c.CalcularValorTotal();
+
+                string statusConta = c.EstaAberta ? "Aberta" : "Fechada";
+
+                Console.WriteLine(
+                "{0, -10} | {1, -30} | {2, -14} | {3, -20} | {4, -20} | {5, -20}",
+                c.Id, c.Titular, c.Mesa.Numero, c.Garcom.Nome, c.Abertura.ToShortDateString(), statusConta
+                );
+            }
+
+            Console.WriteLine($"O Total faturado do dia foi: {totalFaturamento.ToString("C2")}");
 
             ApresentarMensagem("Digite ENTER para continuar...", ConsoleColor.DarkYellow);
         }
@@ -421,5 +534,3 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
         }
     }
 }
-
-//Parou no 14:00

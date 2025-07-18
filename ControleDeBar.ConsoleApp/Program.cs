@@ -35,6 +35,12 @@ namespace ControleDeBar.ConsoleApp
                         case '3': telaConta.ApresentarMenuGestaoPedidos(); break;
 
                         case '4': telaConta.VisualizarRegistros(true); break;
+
+                        case '5': telaConta.VisualizarContasEmAberto(); break;
+
+                        case '6': telaConta.VisualizarContasFechadas(); break;
+
+                        case '7': telaConta.VisualizarFaturamentoDiario(); break;
                     }
                 }
 
