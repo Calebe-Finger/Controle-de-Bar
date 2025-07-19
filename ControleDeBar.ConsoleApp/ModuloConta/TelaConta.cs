@@ -167,15 +167,10 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
                 "Id", "Titular", "Mesa", "Garcom", "Abertura", "Status"
             );
 
-            Conta[] contas = repositorioConta.SelecionarContas();
+            List<Conta> contas = repositorioConta.SelecionarContas();
 
-            for (int i = 0; i < contas.Length; i++)
+            foreach (Conta c in contas)
             {
-                Conta c = contas[i];
-
-                if (c == null)
-                    continue;
-
                 string statusConta = c.EstaAberta ? "Aberta" : "Fechada";
 
                 Console.WriteLine(
@@ -200,15 +195,10 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
                 "Id", "Titular", "Mesa", "Garcom", "Abertura", "Status"
             );
 
-            Conta[] contas = repositorioConta.SelecionarContasEmAberto();
+            List<Conta> contasAbertas = repositorioConta.SelecionarContasEmAberto();
 
-            for (int i = 0; i < contas.Length; i++)
+            foreach (Conta c in contasAbertas)
             {
-                Conta c = contas[i];
-
-                if (c == null)
-                    continue;
-
                 string statusConta = c.EstaAberta ? "Aberta" : "Fechada";
 
                 Console.WriteLine(
@@ -233,15 +223,10 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
                 "Id", "Titular", "Mesa", "Garcom", "Abertura", "Status"
             );
 
-            Conta[] contas = repositorioConta.SelecionarContasFechadas();
+            List<Conta> contasFechadas = repositorioConta.SelecionarContasFechadas();
 
-            for (int i = 0; i < contas.Length; i++)
+            foreach (Conta c in contasFechadas)
             {
-                Conta c = contas[i];
-
-                if (c == null)
-                    continue;
-
                 string statusConta = c.EstaAberta ? "Aberta" : "Fechada";
 
                 Console.WriteLine(
@@ -273,9 +258,9 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
 
             decimal totalFaturamento = 0.0m;
 
-            Conta[] contasFaturamento = repositorioConta.SelecionarContasPorData(dataFaturamento);
+            List<Conta> contasFaturamento = repositorioConta.SelecionarContasPorData(dataFaturamento);
 
-            for (int i = 0; i < contasFaturamento.Length; i++)
+            for (int i = 0; i < contasFaturamento.Count; i++)
             {
                 Conta c = contasFaturamento[i];
 
