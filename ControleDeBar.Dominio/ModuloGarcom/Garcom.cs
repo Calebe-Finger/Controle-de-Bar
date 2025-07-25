@@ -1,6 +1,4 @@
-﻿using ControleDeBar.ConsoleApp.Compartilhado;
-
-namespace ControleDeBar.ConsoleApp.ModuloGarcons
+﻿namespace ControleDeBar.Dominio.ModuloGarcom
 {
     public class Garcom : EntidadeBase<Garcom>
     {

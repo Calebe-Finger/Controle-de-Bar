@@ -1,6 +1,5 @@
 ﻿using ControleDeBar.ConsoleApp.Compartilhado;
 using ControleDeBar.ConsoleApp.ModuloConta;
-using ControleDeBar.ConsoleApp.ModuloMesa;
 
 namespace ControleDeBar.ConsoleApp
 {
@@ -61,3 +60,4 @@ namespace ControleDeBar.ConsoleApp
         }
     }
 }
+

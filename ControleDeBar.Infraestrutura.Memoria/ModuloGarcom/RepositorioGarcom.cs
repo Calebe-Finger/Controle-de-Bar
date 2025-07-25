@@ -1,6 +1,7 @@
 ﻿using ControleDeBar.ConsoleApp.Compartilhado;
+using ControleDeBar.Dominio.ModuloGarcom;
 
-namespace ControleDeBar.ConsoleApp.ModuloGarcons
+namespace ControleDeBar.Infraestrutura.Memoria.ModuloGarcom
 {
     public class RepositorioGarcom : RepositorioBase<Garcom>
     {

@@ -1,5 +1,6 @@
 ﻿using ControleDeBar.ConsoleApp.Compartilhado;
-using System.Text.RegularExpressions;
+using ControleDeBar.Dominio.ModuloGarcom;
+using ControleDeBar.Infraestrutura.Memoria.Compartilhado;
 
 namespace ControleDeBar.ConsoleApp.ModuloGarcons
 {

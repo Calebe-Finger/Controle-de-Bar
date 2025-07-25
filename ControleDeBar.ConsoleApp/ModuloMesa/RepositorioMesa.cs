@@ -1,6 +1,0 @@
-﻿using ControleDeBar.ConsoleApp.Compartilhado;
-
-namespace ControleDeBar.ConsoleApp.ModuloMesa
-{
-    public class RepositorioMesa : RepositorioBase<Mesa>; // É do Tipo Mesa
-}

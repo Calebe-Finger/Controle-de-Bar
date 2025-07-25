@@ -1,4 +1,6 @@
-﻿namespace ControleDeBar.ConsoleApp.ModuloConta
+﻿using ControleDeBar.Dominio.ModuloConta;
+
+namespace ControleDeBar.Infraestrutura.Memoria.ModuloConta
 {
     public class RepositorioConta
     {
