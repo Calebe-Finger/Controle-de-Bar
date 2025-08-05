@@ -1,19 +1,7 @@
-﻿using ControleDeBar.ConsoleApp.Compartilhado;
-using ControleDeBar.Dominio.ModuloGarcom;
+﻿using ControleDeBar.Dominio.ModuloGarcom;
+using ControleDeBar.Infraestrutura.Memoria.Compartilhado;
 
 namespace ControleDeBar.Infraestrutura.Memoria.ModuloGarcom
 {
-    public class RepositorioGarcom : RepositorioBase<Garcom>
-    {
-        private Garcom[] garcom;
-
-        public override bool ExcluirRegistro(int idSelecionado)
-        {
-            if (garcom[idSelecionado].EstaOcupado)
-                return false;
-
-            else
-                return base.ExcluirRegistro(idSelecionado);
-        }
-    }
+    public class RepositorioGarcom : RepositorioBase<Garcom>;
 }

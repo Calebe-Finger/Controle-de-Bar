@@ -1,4 +1,5 @@
 ﻿using ControleDeBar.Dominio.ModuloMesa;
+using ControleDeBar.Infraestrutura.Memoria.Compartilhado;
 
 namespace ControleDeBar.Infraestrutura.Memoria.ModuloMesa
 {
