@@ -10,4 +10,8 @@
     <ProjectReference Include="..\ControleDeBar.Dominio\ControleDeBar.Dominio.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ModuloConta\" />
+  </ItemGroup>
+
 </Project>

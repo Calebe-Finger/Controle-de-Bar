@@ -1,4 +1,6 @@
-﻿namespace ControleDeBar.Dominio.ModuloGarcom
+﻿using ControleDeBar.Dominio.Compartilhado;
+
+namespace ControleDeBar.Dominio.ModuloGarcom
 {
     public class Garcom : EntidadeBase<Garcom>
     {

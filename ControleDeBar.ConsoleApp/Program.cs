@@ -1,11 +1,22 @@
 ﻿using ControleDeBar.ConsoleApp.Compartilhado;
 using ControleDeBar.ConsoleApp.ModuloConta;
+using ControleDeBar.Dominio.ModuloMesa;
+using ControleDeBar.Infraestrutura.Arquivos.Compartilhado;
+using ControleDeBar.Infraestrutura.Arquivos.ModuloMesa;
 
 namespace ControleDeBar.ConsoleApp
 {
     internal class Program
     {
         static void Main(string[] args)
+        {
+            ContextoDados contexto = new ContextoDados(carregarDados: true);
+            RepositorioMesaEmArquivo repositorioMesa = new RepositorioMesaEmArquivo(contexto);
+
+            List<Mesa> mesas = repositorioMesa.SelecionarRegistros();
+        }
+
+        static void Main2(string[] args)
         {
             TelaPrincipal telaPrincipal = new TelaPrincipal();
 
@@ -59,5 +70,4 @@ namespace ControleDeBar.ConsoleApp
             }
         }
     }
-}
-
+} 

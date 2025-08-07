@@ -36,7 +36,7 @@ namespace ControleDeBar.Infraestrutura.Arquivos.Compartilhado
                 jsonOptions.WriteIndented = true;
                 jsonOptions.ReferenceHandler = ReferenceHandler.Preserve;    
 
-            var jsonString = JsonSerializer.Serialize(this);
+            var jsonString = JsonSerializer.Serialize(this, jsonOptions);
 
             if (!Directory.Exists(pastaArmazenamento))
                 Directory.CreateDirectory(pastaArmazenamento);
@@ -57,7 +57,7 @@ namespace ControleDeBar.Infraestrutura.Arquivos.Compartilhado
             JsonSerializerOptions jsonOptions = new JsonSerializerOptions();
             jsonOptions.ReferenceHandler = ReferenceHandler.Preserve;
 
-            ContextoDados? contextoArmazenado = JsonSerializer.Deserialize<ContextoDados>(jsonString);
+            ContextoDados? contextoArmazenado = JsonSerializer.Deserialize<ContextoDados>(jsonString, jsonOptions);
 
             if (contextoArmazenado == null) return;
 

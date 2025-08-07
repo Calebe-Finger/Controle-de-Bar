@@ -1,4 +1,6 @@
-﻿namespace ControleDeBar.Dominio.ModuloProduto
+﻿using ControleDeBar.Dominio.Compartilhado;
+
+namespace ControleDeBar.Dominio.ModuloProduto
 {
     public class Produto : EntidadeBase<Produto>
     {

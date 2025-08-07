@@ -4,14 +4,15 @@ namespace ControleDeBar.Infraestrutura.Memoria.Compartilhado
 {
     public abstract class RepositorioBase<Tipo> where Tipo : EntidadeBase<Tipo>
     {
-        protected List<Tipo> registros = new List<Tipo>();
+        protected Tipo[] registros = new Tipo[100];
+        protected int contadorRegistros = 0;
         protected int contadorIds = 0;
 
         public void CadastrarRegistro(Tipo novoRegistro)
         {
             novoRegistro.Id = ++contadorIds;
 
-            registros.Add(novoRegistro);
+            registros[contadorRegistros++] = novoRegistro;
         }
 
         public bool EditarRegistro(int idSelecionado, Tipo registroAtualizado)
@@ -28,7 +29,7 @@ namespace ControleDeBar.Infraestrutura.Memoria.Compartilhado
 
         public virtual bool ExcluirRegistro(int idSelecionado)
         {
-            for (int i = 0; i < registros.Count; i++)
+            for (int i = 0; i < registros.Length; i++)
             {
                 if (registros[i] == null)
                     continue;
@@ -44,14 +45,14 @@ namespace ControleDeBar.Infraestrutura.Memoria.Compartilhado
             return false;
         }
 
-        public List<Tipo> SelecionarRegistros()
+        public Tipo[] SelecionarRegistros()
         {
             return registros;
         }
 
         public Tipo SelecionarRegistroPorId(int idSelecionado)
         {
-            for (int i = 0; i < registros.Count; i++)
+            for (int i = 0; i < registros.Length; i++)
             {
                 Tipo registro = registros[i];
 

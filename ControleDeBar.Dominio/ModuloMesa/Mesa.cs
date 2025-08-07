@@ -1,4 +1,6 @@
-﻿namespace ControleDeBar.Dominio.ModuloMesa
+﻿using ControleDeBar.Dominio.Compartilhado;
+
+namespace ControleDeBar.Dominio.ModuloMesa
 {
     public class Mesa : EntidadeBase<Mesa> // Possui o Tipo Mesa
     {
