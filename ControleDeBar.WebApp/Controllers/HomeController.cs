@@ -1,6 +1,4 @@
-using ControleDeBar.WebApp.Mvc;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace ControleDeBar.WebApp.Controllers
 {
