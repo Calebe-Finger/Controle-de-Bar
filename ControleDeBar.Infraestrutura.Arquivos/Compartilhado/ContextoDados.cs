@@ -22,7 +22,7 @@ namespace ControleDeBar.Infraestrutura.Arquivos.Compartilhado
 
         public ContextoDados() {}
 
-        public ContextoDados(bool carregarDados)
+        public ContextoDados(bool carregarDados) : this()
         {
             if (carregarDados)
                 Carregar();
@@ -46,7 +46,7 @@ namespace ControleDeBar.Infraestrutura.Arquivos.Compartilhado
 
         public void Carregar()
         {
-            string caminhoCompleto = Path.Combine(arquivoArmazenamento , pastaArmazenamento);
+            string caminhoCompleto = Path.Combine(pastaArmazenamento, arquivoArmazenamento);
 
             if (!File.Exists(caminhoCompleto)) return;
 

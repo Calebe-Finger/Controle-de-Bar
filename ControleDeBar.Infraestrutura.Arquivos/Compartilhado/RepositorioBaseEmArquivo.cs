@@ -13,6 +13,16 @@ namespace ControleDeBar.Infraestrutura.Arquivos.Compartilhado
             this.contextoDados = contextoDados;
 
             registros = ObterRegistros();
+
+            int MaiorId = 0;
+
+            foreach (Tipo registro in registros)
+            {
+                if(registro.Id > MaiorId)
+                    MaiorId = registro.Id;
+            }
+
+            contadorIds = MaiorId;
         }
 
         protected abstract List<Tipo> ObterRegistros();
@@ -82,5 +92,3 @@ namespace ControleDeBar.Infraestrutura.Arquivos.Compartilhado
         }
     }
 }
-
-
