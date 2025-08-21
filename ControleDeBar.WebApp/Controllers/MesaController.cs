@@ -47,5 +47,47 @@ namespace ControleDeBar.WebApp.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public IActionResult Editar(int id)
+        {
+            var registro = repositorioMesa.SelecionarRegistroPorId(id);
+
+            EditarMesaViewModel editarVM = new EditarMesaViewModel(id, registro.Numero, registro.Capacidade);
+
+            return View(editarVM);
+        }
+
+        [HttpPost]
+        public IActionResult Editar(EditarMesaViewModel editarVM)
+        {
+            if (!ModelState.IsValid)
+                return View(editarVM);
+
+            var mesaEditada = new Mesa(editarVM.Numero, editarVM.Capacidade);
+                    
+            repositorioMesa.EditarRegistro(editarVM.Id, mesaEditada);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult Excluir(int id)
+        {
+            var registro = repositorioMesa.SelecionarRegistroPorId(id);
+
+            ExcluirMesaViewModel excluirVM = new ExcluirMesaViewModel(id, registro.Numero);
+
+            return View(excluirVM);
+        }
+
+        [HttpPost]
+        public IActionResult Excluir(ExcluirMesaViewModel excluirVM)
+        {
+            repositorioMesa.ExcluirRegistro(excluirVM.Id);
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
+

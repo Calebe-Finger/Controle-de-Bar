@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Titulo = "Edição de Garçom";
+}
+
+@model EditarGarcomViewModel;
+
+<div class="row justify-content-center">
+    <form class="col-6" asp-action="Editar" method="post">
+        <div class="mb-3">
+            <label asp-for="Nome" class="form-label">Nome</label>
+            <input class="form-control" asp-for="Nome">
+            <span asp-validation-for="Nome" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Cpf" class="form-label">CPF</label>
+            <input class="form-control" asp-for="Cpf">
+            <span asp-validation-for="Cpf" class="text-danger"></span>
+        </div>
+
+        <div class="d-flex gap-2 justify-content-end">
+            <a asp-action="Index" class="btn btn-outline-primary px-5">Voltar</a>
+            <button class="btn btn-primary px-5">Gravar</button>
+        </div>
+    </form>
+</div>

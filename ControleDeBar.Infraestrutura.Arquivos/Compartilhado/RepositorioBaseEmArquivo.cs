@@ -18,7 +18,7 @@ namespace ControleDeBar.Infraestrutura.Arquivos.Compartilhado
 
             foreach (Tipo registro in registros)
             {
-                if(registro.Id > MaiorId)
+                if(registro != null && registro.Id > MaiorId)
                     MaiorId = registro.Id;
             }
 
@@ -54,12 +54,9 @@ namespace ControleDeBar.Infraestrutura.Arquivos.Compartilhado
         {
             for (int i = 0; i < registros.Count; i++)
             {
-                if (registros[i] == null)
-                    continue;
-
-                else if (registros[i].Id == idSelecionado)
+                if (registros[i].Id == idSelecionado)
                 {
-                    registros[i] = null;
+                    registros.Remove(registros[i]);
 
                     contextoDados.Salvar();
 

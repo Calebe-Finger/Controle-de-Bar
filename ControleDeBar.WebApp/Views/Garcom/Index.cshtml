@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Titulo = "Visualização de Garçons";
+}
+
+@model VisualizarGarconsViewModel;
+
+<a class="btn btn-primary" asp-action="Cadastrar">
+    <i class="bi bi-plus"></i>
+    Cadastrar novo
+</a>
+
+<div class="row mt-4">
+    @foreach (DetalhesGarcomViewModel g in Model.Registros)
+    {
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"># @g.Nome</h5>
+                    <p class="card-text mb-0"><strong>Cpf:</strong> @g.Cpf </p>
+                </div>
+
+                <div class="card-actions ms-auto me-3 mb-3 d-flex gap-1">
+                    <a class="btn btn-sm btn-primary rounded-circle d-flex justify-content-center align-items-center" 
+                    style="height: 35px; width: 35px;" href="/Garcom/Editar/@g.Id">
+                        <i class="bi bi-pencil"></i>
+                    </a>
+                    <a class="btn btn-sm btn-danger rounded-circle d-flex justify-content-center align-items-center" 
+                    style="height: 35px; width: 35px;" href="/Garcom/Excluir/@g.Id">
+                        <i class="bi bi-trash2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
