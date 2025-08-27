@@ -19,7 +19,7 @@ namespace ControleDeBar.Dominio.ModuloConta
 
         public decimal CalcularTotalParcial()
         {
-            return Produto.Valor * QuantidadeSolicitada;
+            return Produto.Preco * QuantidadeSolicitada;
         }
 
         public override string ToString()

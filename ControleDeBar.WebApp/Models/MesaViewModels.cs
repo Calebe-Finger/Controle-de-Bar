@@ -79,3 +79,5 @@ namespace ControleDeBar.WebApp.Models
         }
     }
 }
+
+//A45 - V01

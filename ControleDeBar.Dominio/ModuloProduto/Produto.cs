@@ -5,18 +5,18 @@ namespace ControleDeBar.Dominio.ModuloProduto
     public class Produto : EntidadeBase<Produto>
     {
         public string Nome { get; set; }
-        public decimal Valor { get; set; }
+        public decimal Preco { get; set; }
 
-        public Produto(string nome, decimal valor)
+        public Produto(string nome, decimal preco)
         {
             Nome = nome;
-            Valor = valor;
+            Preco = preco;
         }
 
         public override void AtualizarRegistro(Produto registroAtualizado)
         {
             Nome = registroAtualizado.Nome;
-            Valor = registroAtualizado.Valor;
+            Preco = registroAtualizado.Preco;
         }
 
         public override string Validar()
@@ -28,9 +28,9 @@ namespace ControleDeBar.Dominio.ModuloProduto
                 erros += "O atributo \"Nome\" deve conter entre 2 e 100 caracteres!";
             }
 
-            if (Valor == 0.0m)
+            if (Preco == 0.0m)
             {
-                erros += "O atributo \"Valor\" deve conter um número positivo.";
+                erros += "O atributo \"Preco\" deve conter um número positivo.";
             }
 
             return erros;
