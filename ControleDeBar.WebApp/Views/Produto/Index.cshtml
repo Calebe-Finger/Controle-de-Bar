@@ -10,22 +10,22 @@
 </a>
 
 <div class="row mt-4">
-    @foreach (DetalhesProdutoViewModel m in Model.Registros)
+    @foreach (DetalhesProdutoViewModel p in Model.Registros)
     {
         <div class="col-3">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title"># @m.Nome</h5>
-                    <p class="card-text mb-0"><strong>Preço:</strong> R$@m.Preco</p>
+                    <h5 class="card-title"># @p.Nome</h5>
+                    <p class="card-text mb-0"><strong>Preço:</strong> @p.Preco.ToString("C2")</p>
                 </div>
 
                 <div class="card-actions ms-auto me-3 mb-3 d-flex gap-1">
                     <a class="btn btn-sm btn-primary rounded-circle d-flex justify-content-center align-items-center" 
-                    style="height: 35px; width: 35px;" href="/Produto/Editar/@m.Id">
+                    style="height: 35px; width: 35px;" href="/Produto/Editar/@p.Id">
                         <i class="bi bi-pencil"></i>
                     </a>
                     <a class="btn btn-sm btn-danger rounded-circle d-flex justify-content-center align-items-center" 
-                    style="height: 35px; width: 35px;" href="/Produto/Excluir/@m.Id">
+                    style="height: 35px; width: 35px;" href="/Produto/Excluir/@p.Id">
                         <i class="bi bi-trash2"></i>
                     </a>
                 </div>

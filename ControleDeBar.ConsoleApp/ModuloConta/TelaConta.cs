@@ -421,7 +421,7 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
                 "Id", "Produto", "Quantidade", "Valor Parcial"
             );
 
-            Pedido[] pedidos = conta.Pedidos;
+            Pedido[] pedidos = conta.Pedidos.ToArray();
 
             for (int i = 0; i < pedidos.Length; i++)
             {
@@ -444,7 +444,7 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
             Console.WriteLine();
 
             Console.WriteLine(
-                "{0, -10} | {1, -30} | {2, -30}", "Id", "Nome", "Valor");
+                "{0, -10} | {1, -30} | {2, -30}", "Id", "Nome", "Preço");
 
             Produto[] produtos = repositorioProduto.SelecionarRegistros();
 
@@ -455,7 +455,7 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
                 if (p == null)
                     continue;
 
-                Console.WriteLine("{0, -10} | {1, -30} | {2, -30}", p.Id, p.Nome, p.Valor.ToString("C2"));
+                Console.WriteLine("{0, -10} | {1, -30} | {2, -30}", p.Id, p.Nome, p.Preco.ToString("C2"));
             }
         }
 

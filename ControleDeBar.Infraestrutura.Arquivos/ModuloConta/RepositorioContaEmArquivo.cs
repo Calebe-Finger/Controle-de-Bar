@@ -1,22 +1,17 @@
 ﻿using ControleDeBar.Dominio.ModuloConta;
+using ControleDeBar.Infraestrutura.Arquivos.Compartilhado;
 
-namespace ControleDeBar.Infraestrutura.Memoria.ModuloConta
+namespace ControleDeBar.Infraestrutura.Arquivos.ModuloConta
 {
-    public class RepositorioConta
+    public class RepositorioContaEmArquivo : RepositorioBaseEmArquivo<Conta>
     {
-        protected List<Conta> registros = new List<Conta>();
-        protected int contadorIds = 0;
-
-        public void Cadastrar(Conta novaConta)
+        public RepositorioContaEmArquivo(ContextoDados contextoDados) : base(contextoDados)
         {
-            novaConta.Id = ++contadorIds;
-
-            registros.Add(novaConta);
         }
 
-        public List<Conta> SelecionarContas()
+        protected override List<Conta> ObterRegistros()
         {
-            return registros;
+            return contextoDados.Contas;
         }
 
         public List<Conta> SelecionarContasPorData(DateTime dataFaturamento)
@@ -27,9 +22,8 @@ namespace ControleDeBar.Infraestrutura.Memoria.ModuloConta
             {
                 if (conta.Fechamento.Date == dataFaturamento.Date)
                     contasDoDia.Add(conta);
-
             }
-                
+
             return contasDoDia;
         }
 
@@ -41,7 +35,6 @@ namespace ControleDeBar.Infraestrutura.Memoria.ModuloConta
             {
                 if (conta.EstaAberta)
                     contasEmAberto.Add(conta);
-
             }
 
             return contasEmAberto;
@@ -59,16 +52,6 @@ namespace ControleDeBar.Infraestrutura.Memoria.ModuloConta
 
             return contasFechadas;
         }
-
-        public Conta SelecionarRegistroPorId(int idSelecionado)
-        {
-            foreach (Conta conta in registros)
-            {
-                if (conta.Id == idSelecionado)
-                    return conta;
-            }
-
-            return null;
-        }
     }
 }
+
