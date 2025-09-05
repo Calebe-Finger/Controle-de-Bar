@@ -10,6 +10,8 @@ namespace ControleDeBar.Dominio.ModuloConta
 
         private static int contadorIds = 0;
 
+        public Pedido() {}
+
         public Pedido(Produto produto, int quantidadeEscolhida)
         {
             Id = ++contadorIds;
