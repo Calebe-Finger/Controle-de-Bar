@@ -1,13 +1,28 @@
-﻿@{
+﻿@model VisualizarContasViewModel
+
+@{
     ViewBag.Titulo = "Visualização de Contas";
 }
 
-@model VisualizarContasViewModel;
+<div class="d-flex gap-2 align-items-center">
+    <a class="btn btn-outline-primary" asp-action="Abrir">
+        <i class="bi bi-plus"></i>
+        Abrir nova
+    </a>
 
-<a class="btn btn-primary" asp-action="Abrir">
-    <i class="bi bi-plus"></i>
-    Abrir nova
-</a>
+    <a class="btn btn-outline-primary" asp-action="Index">
+        Todas as Contas
+    </a>
+
+    <a class="btn btn-outline-primary" asp-action="Index" asp-route-status="Abertas">
+        Contas Abertas
+    </a>
+
+    <a class="btn btn-outline-primary" asp-action="Index" asp-route-status="Fechadas">
+        Contas Fechadas
+    </a>
+</div>
+
 
 <div class="row mt-4">
     @foreach (DetalhesContaViewModel c in Model.Registros)

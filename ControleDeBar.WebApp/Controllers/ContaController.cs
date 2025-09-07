@@ -31,9 +31,17 @@ namespace ControleDeBar.WebApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(string? status)
         {
-            List<Conta> contas = repositorioConta.SelecionarRegistros();
+            List<Conta> contas;
+
+            switch (status)
+            {
+                case "Abertas": contas = repositorioConta.SelecionarContasEmAberto(); break;
+                case "Fechadas": contas = repositorioConta.SelecionarContasFechadas(); break;
+                default: contas = repositorioConta.SelecionarRegistros(); break;
+            }
+                
 
             VisualizarContasViewModel visualizarContasVm = new VisualizarContasViewModel(contas);
 
@@ -70,6 +78,36 @@ namespace ControleDeBar.WebApp.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public IActionResult Fechar(int id)
+        {
+            Conta contaSelecionada = repositorioConta.SelecionarRegistroPorId(id);
+
+            FecharContaViewModel fecharContaVm = new FecharContaViewModel(
+                contaSelecionada.Id,
+                contaSelecionada.Titular,
+                contaSelecionada.Mesa.Numero,
+                contaSelecionada.Garcom.Nome,
+                contaSelecionada.CalcularValorTotal(),
+                contaSelecionada.Pedidos
+                );
+
+            return View(fecharContaVm);
+        }
+
+        [HttpPost]
+        public IActionResult FecharConfirmado(int id)
+        {
+            Conta contaSelecionada = repositorioConta.SelecionarRegistroPorId(id);
+
+            contaSelecionada.Fechar();
+
+            contextoDados.Salvar();
+
+            return RedirectToAction(nameof(Index));
+        }
+
         [HttpGet]
         public IActionResult GerenciarPedidos(int id)
         {
