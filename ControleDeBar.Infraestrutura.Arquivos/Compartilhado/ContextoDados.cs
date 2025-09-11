@@ -17,8 +17,10 @@ namespace ControleDeBar.Infraestrutura.Arquivos.Compartilhado
 
         public List<Conta> Contas {  get; set; } = new List<Conta>();
 
-        private string pastaArmazenamento = "C:\\temp";
-        private string arquivoArmazenamento = "dados-controle-bar.json";
+        private string pastaArmazenamento = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "ControleDeBar");
+        private string arquivoArmazenamento = "dados.json";
 
         public ContextoDados() {}
 

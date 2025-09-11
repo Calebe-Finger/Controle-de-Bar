@@ -153,5 +153,23 @@ namespace ControleDeBar.WebApp.Controllers
 
             return View(nameof(GerenciarPedidos), gerenciarPedidosVm);
         }
+
+        [HttpGet]
+        public IActionResult Detalhes(int id)
+        {
+            Conta contaSelecionada = repositorioConta.SelecionarRegistroPorId(id);
+
+            DetalhesContaViewModel detalhesContaVm = new DetalhesContaViewModel(
+                contaSelecionada.Id,
+                contaSelecionada.Titular,
+                contaSelecionada.Mesa.Numero,
+                contaSelecionada.Garcom.Nome,
+                contaSelecionada.EstaAberta,
+                contaSelecionada.CalcularValorTotal(),
+                contaSelecionada.Pedidos
+            );
+
+            return View(detalhesContaVm);
+        }
     }
 }
