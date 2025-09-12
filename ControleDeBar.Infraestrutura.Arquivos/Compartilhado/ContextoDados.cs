@@ -70,3 +70,5 @@ namespace ControleDeBar.Infraestrutura.Arquivos.Compartilhado
         }
     }
 }
+
+//A47 - V04 - 17:00

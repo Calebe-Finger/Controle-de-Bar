@@ -21,7 +21,7 @@ namespace ControleDeBar.ConsoleApp.ModuloProduto
 
             Console.WriteLine(
                 "{0, -10} | {1, -30} | {2, -30}",
-                "Id", "Nome", "Valor"
+                "Id", "Nome", "Preço"
             );
 
             Produto[] produtos = repositorio.SelecionarRegistros();
@@ -35,7 +35,7 @@ namespace ControleDeBar.ConsoleApp.ModuloProduto
 
                 Console.WriteLine(
                   "{0, -10} | {1, -30} | {2, -30}",
-                    p.Id, p.Nome, p.Valor.ToString("C2")
+                    p.Id, p.Nome, p.Preco.ToString("C2")
                 );
             }
 
@@ -63,12 +63,12 @@ namespace ControleDeBar.ConsoleApp.ModuloProduto
 
             valorCorreto = false;
             bool conseguiuConverterValor = false;
-            decimal valor = 0.0m;
+            decimal preco = 0.0m;
 
             while (!conseguiuConverterValor)
             {
-                Console.WriteLine("Digite o valor do produto:");
-                conseguiuConverterValor = decimal.TryParse(Console.ReadLine(), out valor);
+                Console.WriteLine("Digite o preço do produto:");
+                conseguiuConverterValor = decimal.TryParse(Console.ReadLine(), out preco);
 
                 if (conseguiuConverterValor)
                 {
@@ -79,7 +79,7 @@ namespace ControleDeBar.ConsoleApp.ModuloProduto
                     valorCorreto = true;
             }
 
-            return new Produto(nome, valor);
+            return new Produto(nome, preco);
         }
     }
 }
