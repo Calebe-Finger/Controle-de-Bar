@@ -37,8 +37,8 @@ namespace ControleDeBar.WebApp.Controllers
 
             switch (status)
             {
-                case "Abertas": contas = repositorioConta.SelecionarContasEmAberto(); break;
-                case "Fechadas": contas = repositorioConta.SelecionarContasFechadas(); break;
+                case "abertas": contas = repositorioConta.SelecionarContasEmAberto(); break;
+                case "fechadas": contas = repositorioConta.SelecionarContasFechadas(); break;
                 default: contas = repositorioConta.SelecionarRegistros(); break;
             }
                 
