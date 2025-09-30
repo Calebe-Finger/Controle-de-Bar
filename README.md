@@ -1,6 +1,6 @@
 # ControleDeBar
 
-![](.gif)
+![](https://imgur.com/32FzrCc.gif)
 
 ## Introdução 
  
